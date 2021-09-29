@@ -17,5 +17,5 @@ jobs:
           build_configuration: production
           base_href: https://czajrow.github.io/p5-fun/
           deploy_branch: gh-pages
-          angular_dist_build_folder: dist/p5-fun
+          angular_dist_build_folder: dist/p5test
           
