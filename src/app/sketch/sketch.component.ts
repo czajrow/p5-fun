@@ -18,7 +18,7 @@ export class SketchComponent implements OnInit {
     const sketch = (s: P5) => {
 
       s.setup = () => {
-        console.log('setup');
+        console.log('setup!');
         s.createCanvas(400, 400).parent('my-canvas-id');
         this.gravity.set(0, 0.4)
         this.resistance = 0.005;
@@ -26,7 +26,7 @@ export class SketchComponent implements OnInit {
       };
 
       s.preload = () => {
-        console.log('preload');
+        console.log('preload!');
       }
 
       s.draw = () => {
