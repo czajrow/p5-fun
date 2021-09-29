@@ -21,7 +21,7 @@ export class Particle {
   }
 
   public show(): void {
-    this.s.fill(255, 0, 0);
+    this.s.fill(0, 255, 0);
     this.s.circle(this.position.x, this.position.y, this.radius * 2);
   }
 
