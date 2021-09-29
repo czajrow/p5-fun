@@ -1,6 +1,7 @@
-
 .app-sketch {
-  width: fit-content;
-  height: fit-content;
-  border: 1px solid red;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 100px;
+  min-height: 100px;
 }

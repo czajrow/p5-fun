@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Angular stuff
+        uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.1
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          build_configuration: production
+          base_href: https://czajrow.github.io/p5-fun/
+          deploy_branch: gh-pages
+          angular_dist_build_folder: dist/p5-fun
