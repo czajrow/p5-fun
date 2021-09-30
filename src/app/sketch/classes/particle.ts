@@ -17,6 +17,7 @@ export class Particle {
   ) {
     this.position.set(x, y);
     this.meanPos = this.position.y;
+    this.velocity.set((Math.random() - 0.5) * 100, 0);
   }
 
   public show(): void {
