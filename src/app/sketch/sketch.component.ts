@@ -11,34 +11,40 @@ export class SketchComponent implements OnInit {
 
   @ViewChild('sketchDiv', { static: true }) private readonly sketchDivRef: ElementRef | undefined;
 
-  private particle: Particle | undefined;
+  private particles: Particle[] = [];
 
   private gravity = new P5.Vector();
   private resistance = 0;
 
   ngOnInit() {
-    console.log('DIV', this.sketchDivRef?.nativeElement);
     const sketch = (s: P5) => {
 
       s.setup = () => {
         console.log('setup!');
-        console.log(this.sketchDivRef?.nativeElement.offsetWidth, this.sketchDivRef?.nativeElement.offsetHeight);
         s.createCanvas(this.sketchDivRef?.nativeElement.offsetWidth, this.sketchDivRef?.nativeElement.offsetHeight).parent('my-canvas-id');
-        this.gravity.set(0, 0.4)
-        this.resistance = 0.005;
-        this.particle = new Particle(s, s.width / 2, 0);
+        this.gravity.set(0, 1.9)
+        this.resistance = 0.02;
       };
 
       s.preload = () => {
         console.log('preload!');
       }
 
+      s.mouseClicked = () => {
+        this.particles.push(new Particle(s, s.mouseX, s.mouseY));
+      }
+
       s.draw = () => {
         s.background(51);
-        this.particle?.applyForce(this.gravity);
-        this.particle?.multiplyVelocity(1 - this.resistance);
-        this.particle?.update();
-        this.particle?.show();
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          this.particles[i].applyForce(this.gravity);
+          this.particles[i].multiplyVelocity(1 - this.resistance);
+          this.particles[i].update();
+          this.particles[i].show();
+          if (this.particles[i].dead) {
+            this.particles.splice(i, 1);
+          }
+        }
       };
     }
     let canvas = new P5(sketch);

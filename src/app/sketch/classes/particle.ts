@@ -7,6 +7,8 @@ export class Particle {
   private readonly position = new P5.Vector();
   private readonly velocity = new P5.Vector();
   private readonly acceleration = new P5.Vector();
+  private meanPos: number;
+  public dead: boolean = false;
 
   constructor(
     private s: P5,
@@ -14,14 +16,13 @@ export class Particle {
     y: number,
   ) {
     this.position.set(x, y);
-  }
-
-  public setPosition(x: number, y: number) {
-    this.position.set(x, y);
+    this.meanPos = this.position.y;
   }
 
   public show(): void {
     this.s.fill(0, 255, 0);
+    this.s.strokeWeight(0);
+
     this.s.circle(this.position.x, this.position.y, this.radius * 2);
   }
 
@@ -38,6 +39,10 @@ export class Particle {
     this.position.add(this.velocity);
     this.acceleration.setMag(0);
     this.boundaries();
+    this.meanPos = (this.meanPos + this.position.y) * 0.5;
+    if (Math.abs(this.meanPos - this.position.y) < 0.001) {
+      this.dead = true;
+    }
   }
 
   private boundaries(): void {
