@@ -21,7 +21,8 @@ export class Particle {
 
   public show(): void {
     this.s.fill(0, 255, 0);
-    this.s.strokeWeight(0);
+    this.s.strokeWeight(1);
+    this.s.stroke(64);
 
     this.s.circle(this.position.x, this.position.y, this.radius * 2);
   }
