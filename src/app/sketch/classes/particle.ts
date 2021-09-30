@@ -7,6 +7,7 @@ export class Particle {
   private readonly position = new P5.Vector();
   private readonly velocity = new P5.Vector();
   private readonly acceleration = new P5.Vector();
+  private readonly color: number;
   private meanPos: number;
   public dead: boolean = false;
 
@@ -17,11 +18,14 @@ export class Particle {
   ) {
     this.position.set(x, y);
     this.meanPos = this.position.y;
-    this.velocity.set((Math.random() - 0.5) * 100, 0);
+    this.velocity.set(this.s.random(-50, 50), 0);
+    this.color = Math.random();
   }
 
   public show(): void {
-    this.s.fill(0, 255, 0);
+    this.s.colorMode(this.s.HSB, 1);
+    this.s.fill(this.color, 1, 1);
+    this.s.colorMode(this.s.RGB);
     this.s.strokeWeight(1);
     this.s.stroke(64);
 
