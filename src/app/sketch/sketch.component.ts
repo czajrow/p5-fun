@@ -31,7 +31,7 @@ export class SketchComponent implements OnInit {
       }
 
       s.mouseClicked = () => {
-        this.particles.push(new Particle(s, s.mouseX, s.mouseY));
+        this.particles.unshift(new Particle(s, s.mouseX, s.mouseY));
       }
 
       s.draw = () => {
