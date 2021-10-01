@@ -25,7 +25,7 @@ export class Particle {
     const size = Math.random();
     this.color = size;
     this.radius = (size + 1) * 30;
-    this.body = Bodies.circle(x, y, this.radius, {restitution: 1.0});
+    this.body = Bodies.circle(x, y, this.radius, {restitution: 0.8});
     Body.setMass(this.body, this.radius * this.radius);
     World.add(world, this.body);
   }

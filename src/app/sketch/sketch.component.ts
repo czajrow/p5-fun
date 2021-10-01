@@ -28,9 +28,9 @@ export class SketchComponent implements OnInit {
         s.createCanvas(this.sketchDivRef?.nativeElement.offsetWidth, this.sketchDivRef?.nativeElement.offsetHeight).parent('my-canvas-id');
         this.gravity.set(0, 1.9)
         this.resistance = 0.02;
-        const floor = Bodies.rectangle(s.width / 2, s.height + 50, s.width, 100, {restitution: 1.0});
-        const wallLeft = Bodies.rectangle(-50, s.height / 2, 100, s.height, {restitution: 1.0});
-        const wallRight = Bodies.rectangle(s.width + 50, s.height / 2, 100, s.height, {restitution: 1.0});
+        const floor = Bodies.rectangle(s.width / 2, s.height + 50, s.width, 100, {restitution: 0.8});
+        const wallLeft = Bodies.rectangle(-50, s.height / 2, 100, s.height, {restitution: 0.8});
+        const wallRight = Bodies.rectangle(s.width + 50, s.height / 2, 100, s.height, {restitution: 0.8});
         floor.isStatic = true;
         wallLeft.isStatic = true;
         wallRight.isStatic = true;
