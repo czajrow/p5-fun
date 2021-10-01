@@ -1,4 +1,5 @@
 import * as P5 from 'p5';
+import { Engine, Runner, Render, World, Constraint, MouseConstraint, Bodies} from 'matter-js'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {Particle} from "./classes/particle";
 
@@ -15,6 +16,9 @@ export class SketchComponent implements OnInit {
 
   private gravity = new P5.Vector();
   private resistance = 0;
+  private engine: Matter.Engine = Engine.create();
+  private world: World = this.engine.world;
+  // private ground = new Ground(width / 2, height - 10, width, 20);
 
   ngOnInit() {
     const sketch = (s: P5) => {
@@ -24,6 +28,17 @@ export class SketchComponent implements OnInit {
         s.createCanvas(this.sketchDivRef?.nativeElement.offsetWidth, this.sketchDivRef?.nativeElement.offsetHeight).parent('my-canvas-id');
         this.gravity.set(0, 1.9)
         this.resistance = 0.02;
+        const floor = Bodies.rectangle(s.width / 2, s.height + 50, s.width, 100, {restitution: 1.0});
+        const wallLeft = Bodies.rectangle(-50, s.height / 2, 100, s.height, {restitution: 1.0});
+        const wallRight = Bodies.rectangle(s.width + 50, s.height / 2, 100, s.height, {restitution: 1.0});
+        floor.isStatic = true;
+        wallLeft.isStatic = true;
+        wallRight.isStatic = true;
+        World.add(this.world, floor);
+        World.add(this.world, wallLeft);
+        World.add(this.world, wallRight);
+        // Engine.run(this.engine);
+        Runner.run(this.engine);
       };
 
       s.preload = () => {
@@ -31,19 +46,14 @@ export class SketchComponent implements OnInit {
       }
 
       s.mouseClicked = () => {
-        this.particles.unshift(new Particle(s, s.mouseX, s.mouseY));
+        this.particles.unshift(new Particle(s, s.mouseX, s.mouseY, this.world));
       }
 
       s.draw = () => {
         s.background(51);
+        // Engine.update(this.engine);
         for (let i = this.particles.length - 1; i >= 0; i--) {
-          this.particles[i].applyForce(this.gravity);
-          this.particles[i].multiplyVelocity(1 - this.resistance);
-          this.particles[i].update();
           this.particles[i].show();
-          if (this.particles[i].dead) {
-            this.particles.splice(i, 1);
-          }
         }
       };
     }

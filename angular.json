@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "p5-test:build:production"
+              "browserTarget": "p5-fun:build:production"
             },
             "development": {
-              "browserTarget": "p5-test:build:development"
+              "browserTarget": "p5-fun:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "p5-test:build"
+            "browserTarget": "p5-fun:build"
           }
         },
         "test": {
@@ -107,5 +107,5 @@
       }
     }
   },
-  "defaultProject": "p5-test"
+  "defaultProject": "p5-fun"
 }
