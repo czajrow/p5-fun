@@ -25,8 +25,14 @@ export class Particle {
     const size = Math.random();
     this.color = size;
     this.radius = (size + 1) * 30;
-    this.body = Bodies.circle(x, y, this.radius, {restitution: 0.8});
-    Body.setMass(this.body, this.radius * this.radius);
+    this.body = Bodies.circle(x, y, this.radius, {
+      restitution: 0.8,
+      frictionAir: 0,
+      frictionStatic: 0,
+      friction: 0,
+    });
+    // Body.setMass(this.body, this.radius * this.radius);
+    Body.setMass(this.body, this.radius * this.radius * 0.0001);
     World.add(world, this.body);
   }
 
